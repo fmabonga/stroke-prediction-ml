@@ -29,6 +29,19 @@ The notebook provides:
 - Model selection and evaluation metrics  
 - Insights and observations from the dataset  
 
+## 💾 Saving the Model
+
+The trained machine learning model is saved as a binary file using the `train.py` script. This allows the model to be reused for inference without retraining.
+
+### Steps to Save the Model
+
+1. Run the training script:
+
+```bash
+python train.py
+
+```
+
 ## 🐳 Docker Build & AWS Lambda Deployment
 
 This project includes a `deploy.sh` script to simplify building the Docker image for the Lambda function and deploying it to AWS.
