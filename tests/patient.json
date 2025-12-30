@@ -1,0 +1,14 @@
+{
+    "patient": {
+        "gender": "female",
+        "age": 68.0,
+        "hypertension": 1,
+        "heart_disease": 0,
+        "ever_married": "yes",
+        "work_type": "self-employed",
+        "residence_type": "rural",
+        "avg_glucose_level": 206.09,
+        "bmi": 26.7,
+        "smoking_status": "never_smoked"
+    }
+}

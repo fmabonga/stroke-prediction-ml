@@ -1,22 +1,12 @@
-FROM python:3.13.5
-WORKDIR /code
+FROM public.ecr.aws/lambda/python:3.13
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
 
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+COPY pyproject.toml uv.lock ./
 
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.local/bin:$PATH"
+RUN uv pip install --system -r <(uv export --format requirements-txt)
 
-COPY pyproject.toml ./
-COPY uv.lock ./
+COPY lambda_function.py stroke-prediction-model.bin .
 
-RUN uv sync --frozen
 
-COPY predict.py .
-COPY stroke-prediction-model.bin .
-
-EXPOSE 32000
-
-ENTRYPOINT ["uv", "run", "gunicorn", "predict:app", "-b", "0.0.0.0:32000"]
+CMD ["lambda_function.lambda_handler"]
